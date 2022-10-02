@@ -1,0 +1,23 @@
+{
+  "name": "React-system-design",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Trevoule/React-atomic-system-design.git",
+  "author": "Wladyslaw Reginiewicz <wladyslaw.reginiewicz@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^5.5.4"
+  },
+  "private": "true",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/normalize-scss"
+    ]
+  },
+  "scripts": {
+    "build": "yarn lerna run build"
+  }
+}
