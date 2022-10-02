@@ -1,5 +1,5 @@
 {
-  "name": "React-system-design",
+  "name": "@ds.e/core",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/Trevoule/React-atomic-system-design.git",
@@ -11,7 +11,8 @@
   "private": "true",
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "playgrounds/*"
     ],
     "nohoist": [
       "**/normalize-scss"
