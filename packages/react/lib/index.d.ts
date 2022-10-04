@@ -1,3 +1,4 @@
 import Color from "./atoms/Color";
-import Spacing from "./foundation/Spacing";
-export { Color, Spacing };
+import Text from "./atoms/Text";
+import { Spacing, FontSize } from "@ds.e/foundation";
+export { Color, Spacing, FontSize, Text };
