@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Color from "@ds.e/react/lib/atoms/Color";
+import Color from "@ds.e/react/src/atoms/Color";
 
-import "@ds.e/scss/lib/Button.css";
+import "@ds.e/scss/lib/Utilities.css";
 
 ReactDOM.render(
-  <Color hexCode="#000" width="1rem" height="1rem"/>,
+  <Color hexCode="#000" width="xl" height="xl"/>,
   document.querySelector("#root")
 );
