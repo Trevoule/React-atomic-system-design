@@ -1,5 +1,5 @@
 import Color from "./atoms/Color";
 import Text from "./atoms/Text";
-import { Spacing, FontSize } from "@ds.e/foundation";
+import Margin from "./atoms/Margin";
 
-export {  Color, Spacing, FontSize, Text  };
+export {  Color, Text, Margin  };

@@ -1,4 +1,4 @@
 export { default as Color } from './atoms/Color/Color.js';
 export { default as Text } from './atoms/Text/Text.js';
-export { FontSize, Spacing } from '@ds.e/foundation';
+export { default as Margin } from './atoms/Margin/Margin.js';
 //# sourceMappingURL=index.js.map
