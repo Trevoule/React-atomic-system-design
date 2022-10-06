@@ -8,6 +8,7 @@ import "@ds.e/scss/lib/Utilities.css";
 import "@ds.e/scss/lib/Margin.css";
 import "@ds.e/scss/lib/global.css";
 import "@ds.e/scss/lib/Text.css";
+import "@ds.e/scss/lib/Select.css"
 
 const options = [{
   label: 'Strict Black',
@@ -21,12 +22,12 @@ const options = [{
 }]
 
 ReactDOM.render(
-  <div>
-    <Margin>
-  <Color hexCode="#000" width="xl" height="xl"/>
-  <Text>some text</Text>
-  <Select options={options}/>
-  </Margin>
-  </div>,
+    <Select options={options}/>,
+  // <div>
+  //   <Margin>
+  // <Color hexCode="#000" width="xl" height="xl"/>
+  // <Text>some text</Text>
+  // </Margin>
+  // </div>,
   document.querySelector("#root")
 );

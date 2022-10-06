@@ -28291,185 +28291,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"../../../node_modules/react-dom/cjs/react-dom.development.js"}],"../../../node_modules/@ds.e/foundation/lib/FontSize.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-const fontSizes = {
-  xs: 'xs',
-  sm: 'sm',
-  base: 'base',
-  lg: 'lg',
-  xl: 'xl'
-};
-
-var _default = Object.freeze(fontSizes);
-
-exports.default = _default;
-},{}],"../../../node_modules/@ds.e/foundation/lib/Spacing.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-const spaces = {
-  none: 'none',
-  xxxs: "xxxs",
-  // 4px
-  xxs: "xxs",
-  // 8px
-  xs: "xs",
-  // 12px
-  sm: "sm",
-  // 16px
-  md: "md",
-  // 24px
-  lg: "lg",
-  // 32px
-  xl: "xl",
-  // 48px
-  xxl: "xxl",
-  // 72px
-  xxxl: "xxxl" // 96px
-
-};
-
-var _default = Object.freeze(spaces);
-
-exports.default = _default;
-},{}],"../../../node_modules/@ds.e/foundation/lib/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "FontSize", {
-  enumerable: true,
-  get: function () {
-    return _FontSize.default;
-  }
-});
-Object.defineProperty(exports, "Spacing", {
-  enumerable: true,
-  get: function () {
-    return _Spacing.default;
-  }
-});
-
-var _FontSize = _interopRequireDefault(require("./FontSize"));
-
-var _Spacing = _interopRequireDefault(require("./Spacing"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./FontSize":"../../../node_modules/@ds.e/foundation/lib/FontSize.js","./Spacing":"../../../node_modules/@ds.e/foundation/lib/Spacing.js"}],"../../../node_modules/@ds.e/react/lib/atoms/Color/Color.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _foundation = require("@ds.e/foundation");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const Color = ({
-  hexCode,
-  width = _foundation.Spacing.sm,
-  height = _foundation.Spacing.sm
-}) => {
-  const className = `dse-width-${width} dse-height-${height}`;
-  return _react.default.createElement("div", {
-    className: className,
-    style: {
-      backgroundColor: hexCode,
-      width,
-      height
-    }
-  });
-};
-
-exports.default = Color;
-},{"react":"../../../node_modules/react/index.js","@ds.e/foundation":"../../../node_modules/@ds.e/foundation/lib/index.js"}],"../../../node_modules/@ds.e/react/lib/atoms/Text/Text.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _foundation = require("@ds.e/foundation");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const Text = ({
-  size = _foundation.FontSize.base,
-  children
-}) => {
-  const className = `dse-text dse-text-${size}`;
-  return _react.default.createElement("p", {
-    className: className
-  }, children);
-};
-
-exports.default = Text;
-},{"react":"../../../node_modules/react/index.js","@ds.e/foundation":"../../../node_modules/@ds.e/foundation/lib/index.js"}],"../../../node_modules/@ds.e/react/lib/atoms/Margin/Margin.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const Margin = ({
-  space = "sm",
-  children,
-  left,
-  right,
-  bottom,
-  top
-}) => {
-  let className = ``;
-
-  if (!left && !right && !top && !bottom) {
-    className = `dse-margin-${space}`;
-  }
-
-  if (left) {
-    className = `${className} dse-margin-left-${space}`;
-  }
-
-  if (right) {
-    className = `${className} dse-margin-right-${space}`;
-  }
-
-  if (top) {
-    className = `${className} dse-margin-top-${space}`;
-  }
-
-  if (bottom) {
-    className = `${className} dse-margin-bottom-${space}`;
-  }
-
-  return _react.default.createElement("div", {
-    className: className
-  }, children);
-};
-
-exports.default = Margin;
-},{"react":"../../../node_modules/react/index.js"}],"../../../node_modules/@ds.e/react/lib/molecules/Select/Select.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"../../../node_modules/react-dom/cjs/react-dom.development.js"}],"../../../node_modules/@ds.e/react/lib/molecules/Select/Select.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28500,9 +28322,26 @@ const Select = ({
     setIsOpen(!isOpen);
   };
 
-  return _react.default.createElement("div", null, _react.default.createElement("button", {
+  return _react.default.createElement("div", {
+    className: 'dse-select'
+  }, _react.default.createElement("button", {
+    className: 'dse-select__label',
     onClick: () => onLabelClick()
-  }, label), isOpen && _react.default.createElement("ul", null, options.map((option, optionIndex) => {
+  }, _react.default.createElement("span", null, label), _react.default.createElement("svg", {
+    width: "1rem",
+    height: "1rem",
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    "stroke-width": "1.5",
+    stroke: "currentColor"
+  }, _react.default.createElement("path", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    d: "M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
+  }))), isOpen && _react.default.createElement("ul", {
+    className: 'dse-select__overlay'
+  }, options.map((option, optionIndex) => {
     return _react.default.createElement("li", {
       onClick: () => onOptionSelected(option, optionIndex),
       key: option.value
@@ -28511,47 +28350,7 @@ const Select = ({
 };
 
 exports.default = Select;
-},{"react":"../../../node_modules/react/index.js"}],"../../../node_modules/@ds.e/react/lib/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "Color", {
-  enumerable: true,
-  get: function () {
-    return _Color.default;
-  }
-});
-Object.defineProperty(exports, "Margin", {
-  enumerable: true,
-  get: function () {
-    return _Margin.default;
-  }
-});
-Object.defineProperty(exports, "Select", {
-  enumerable: true,
-  get: function () {
-    return _Select.default;
-  }
-});
-Object.defineProperty(exports, "Text", {
-  enumerable: true,
-  get: function () {
-    return _Text.default;
-  }
-});
-
-var _Color = _interopRequireDefault(require("./atoms/Color/Color.js"));
-
-var _Text = _interopRequireDefault(require("./atoms/Text/Text.js"));
-
-var _Margin = _interopRequireDefault(require("./atoms/Margin/Margin.js"));
-
-var _Select = _interopRequireDefault(require("./molecules/Select/Select.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./atoms/Color/Color.js":"../../../node_modules/@ds.e/react/lib/atoms/Color/Color.js","./atoms/Text/Text.js":"../../../node_modules/@ds.e/react/lib/atoms/Text/Text.js","./atoms/Margin/Margin.js":"../../../node_modules/@ds.e/react/lib/atoms/Margin/Margin.js","./molecules/Select/Select.js":"../../../node_modules/@ds.e/react/lib/molecules/Select/Select.js"}],"../../../node_modules/@ds.e/react/lib/molecules/Select/index.js":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js"}],"../../../node_modules/@ds.e/react/lib/molecules/Select/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28658,14 +28457,18 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
+},{"_css_loader":"../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../node_modules/@ds.e/scss/lib/Select.css":[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
 },{"_css_loader":"../../../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.tsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
-
-var _lib = require("@ds.e/react/lib");
 
 var _index = _interopRequireDefault(require("@ds.e/react/lib/molecules/Select/index"));
 
@@ -28676,6 +28479,8 @@ require("@ds.e/scss/lib/Margin.css");
 require("@ds.e/scss/lib/global.css");
 
 require("@ds.e/scss/lib/Text.css");
+
+require("@ds.e/scss/lib/Select.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28690,14 +28495,16 @@ var options = [{
   value: 'pink'
 }];
 
-_reactDom.default.render(_react.default.createElement("div", null, _react.default.createElement(_lib.Margin, null, _react.default.createElement(_lib.Color, {
-  hexCode: "#000",
-  width: "xl",
-  height: "xl"
-}), _react.default.createElement(_lib.Text, null, "some text"), _react.default.createElement(_index.default, {
+_reactDom.default.render(_react.default.createElement(_index.default, {
   options: options
-}))), document.querySelector("#root"));
-},{"react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","@ds.e/react/lib":"../../../node_modules/@ds.e/react/lib/index.js","@ds.e/react/lib/molecules/Select/index":"../../../node_modules/@ds.e/react/lib/molecules/Select/index.js","@ds.e/scss/lib/Utilities.css":"../../../node_modules/@ds.e/scss/lib/Utilities.css","@ds.e/scss/lib/Margin.css":"../../../node_modules/@ds.e/scss/lib/Margin.css","@ds.e/scss/lib/global.css":"../../../node_modules/@ds.e/scss/lib/global.css","@ds.e/scss/lib/Text.css":"../../../node_modules/@ds.e/scss/lib/Text.css"}],"../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+}), // <div>
+//   <Margin>
+// <Color hexCode="#000" width="xl" height="xl"/>
+// <Text>some text</Text>
+// </Margin>
+// </div>,
+document.querySelector("#root"));
+},{"react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","@ds.e/react/lib/molecules/Select/index":"../../../node_modules/@ds.e/react/lib/molecules/Select/index.js","@ds.e/scss/lib/Utilities.css":"../../../node_modules/@ds.e/scss/lib/Utilities.css","@ds.e/scss/lib/Margin.css":"../../../node_modules/@ds.e/scss/lib/Margin.css","@ds.e/scss/lib/global.css":"../../../node_modules/@ds.e/scss/lib/global.css","@ds.e/scss/lib/Text.css":"../../../node_modules/@ds.e/scss/lib/Text.css","@ds.e/scss/lib/Select.css":"../../../node_modules/@ds.e/scss/lib/Select.css"}],"../../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -28725,7 +28532,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37893" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34497" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

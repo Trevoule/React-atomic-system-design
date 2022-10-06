@@ -1,0 +1,38 @@
+@import "foundation/all";
+
+.dse-select {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    &__label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        // padding: map-get($spacing,'xs');
+        @include padding('xs');
+        // border: 1px solid $white-dark;
+        border: 1px solid $form-border-color;
+        // background: $white;
+        background: $form-bg;
+
+        font-size: $body-font-size;
+
+        cursor: pointer;
+    }
+
+    &__overlay {
+        @include padding('none');
+        @include margin('none');
+
+        border: 1px solid $form-border-color;
+        background-color: $form-bg;
+        z-index: 99;
+
+        position: absolute;
+
+        width: 100%;
+    }
+}
