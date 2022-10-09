@@ -28411,7 +28411,35 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 const KEY_CODES = {
   ENTER: 13,
   SPACE: 32,
-  DOWN_ARROW: 40
+  DOWN_ARROW: 40,
+  UP_ARROW: 38,
+  ESC: 27
+};
+
+const getPreviousOptionIndex = (currentIndex, options) => {
+  if (currentIndex === null) {
+    return 0;
+  } // last item
+
+
+  if (currentIndex === 0) {
+    return options.length - 1;
+  }
+
+  return currentIndex - 1;
+};
+
+const getNextOptionIndex = (currentIndex, options) => {
+  if (currentIndex === null) {
+    return 0;
+  } // last item
+
+
+  if (currentIndex === options.length - 1) {
+    return 0;
+  }
+
+  return currentIndex + 1;
 };
 
 const Select = ({
@@ -28449,7 +28477,7 @@ const Select = ({
     selectedOption = options[selectedIndex];
   }
 
-  const highlightItem = optionIndex => {
+  const highlightOption = optionIndex => {
     setHighlightedIndex(optionIndex);
   };
 
@@ -28459,14 +28487,13 @@ const Select = ({
     if ([KEY_CODES.DOWN_ARROW, KEY_CODES.ENTER, KEY_CODES.SPACE].includes(event.keyCode)) {
       setIsOpen(true); // set focus on the list item
 
-      highlightItem(0);
+      highlightOption(0);
     }
   };
 
   (0, _react.useEffect)(() => {
     setOptionRefs(options.map(_ => (0, _react.createRef)()));
   }, [options.length]);
-  console.log(optionRefs);
   (0, _react.useEffect)(() => {
     if (highlightedIndex !== null && isOpen) {
       const ref = optionRefs[highlightedIndex];
@@ -28475,7 +28502,27 @@ const Select = ({
         ref.current.focus();
       }
     }
-  }, [isOpen]);
+  }, [isOpen, highlightedIndex]);
+
+  const onOptionKeyDown = event => {
+    if (event.keyCode === KEY_CODES.ESC) {
+      setIsOpen(false);
+      return;
+    }
+
+    if (event.keyCode === KEY_CODES.DOWN_ARROW) {
+      highlightOption(getNextOptionIndex(highlightedIndex, options));
+    }
+
+    if (event.keyCode === KEY_CODES.UP_ARROW) {
+      highlightOption(getPreviousOptionIndex(highlightedIndex, options));
+    }
+
+    if (event.keyCode === KEY_CODES.ENTER) {
+      onOptionSelected(options[highlightedIndex], highlightedIndex);
+    }
+  };
+
   return _react.default.createElement("div", {
     className: 'dse-select'
   }, _react.default.createElement("button", {
@@ -28516,9 +28563,13 @@ const Select = ({
       getOptionRecommendedProps: (overrideProps = {}) => {
         return {
           ref,
+          role: 'menuitemradio',
+          'aria-label': option.label,
+          'aria-checked': isSelected ? true : undefined,
+          onKeyDown: onOptionKeyDown,
           tabIndex: isHighlighted ? -1 : 0,
-          onMouseEnter: () => highlightItem(optionIndex),
-          onMouseLeave: () => highlightItem(null),
+          onMouseEnter: () => highlightOption(optionIndex),
+          onMouseLeave: () => highlightOption(null),
           className: `dse-select__option 
             ${isSelected ? "dse-select__option--selected" : ""},
             ${isHighlighted ? "dse-select-option--highlighted" : ""}`,
