@@ -49,7 +49,7 @@ const Select:React.FC<SelectProps> = ({options = [], label = 'Please select an o
   
   return (
     <div className='dse-select'>
-        <button ref={labelRef} className='dse-select__label' onClick={() => onLabelClick()}>
+        <button aria-controls='dse-select-list' aria-haspopup={true} aria-expanded={isOpen} ref={labelRef} className='dse-select__label' onClick={() => onLabelClick()}>
       <Text>
         {selectedIndex === null ? label : selectedOption?.label}
       </Text>
@@ -57,7 +57,7 @@ const Select:React.FC<SelectProps> = ({options = [], label = 'Please select an o
         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
       </svg>
         </button>
-    {isOpen && overlayTop && (<ul style={{top: overlayTop}} className='dse-select__overlay'>{options.map((option, optionIndex) => {
+    {isOpen && overlayTop && (<ul role="menu" id="dse-select-list" style={{top: overlayTop}} className='dse-select__overlay'>{options.map((option, optionIndex) => {
         
       const isSelected = selectedIndex === optionIndex
         
