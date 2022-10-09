@@ -28311,6 +28311,8 @@ const Select = ({
   onOptionSelected: handler
 }) => {
   const [isOpen, setIsOpen] = (0, _react.useState)(false);
+  const labelRef = (0, _react.useRef)(null);
+  const [overlayTop, setOverlayTop] = (0, _react.useState)(null);
 
   const onOptionSelected = (option, optionIndex) => {
     if (handler) {
@@ -28322,9 +28324,13 @@ const Select = ({
     setIsOpen(!isOpen);
   };
 
+  (0, _react.useEffect)(() => {
+    setOverlayTop((labelRef.current?.offsetHeight || 0) + 10);
+  }, [labelRef.current?.offsetHeight]);
   return _react.default.createElement("div", {
     className: 'dse-select'
   }, _react.default.createElement("button", {
+    ref: labelRef,
     className: 'dse-select__label',
     onClick: () => onLabelClick()
   }, _react.default.createElement("span", null, label), _react.default.createElement("svg", {
@@ -28339,7 +28345,10 @@ const Select = ({
     "stroke-linecap": "round",
     "stroke-linejoin": "round",
     d: "M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
-  }))), isOpen && _react.default.createElement("ul", {
+  }))), isOpen && overlayTop && _react.default.createElement("ul", {
+    style: {
+      top: overlayTop
+    },
     className: 'dse-select__overlay'
   }, options.map((option, optionIndex) => {
     return _react.default.createElement("li", {
@@ -28532,7 +28541,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34497" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44305" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
