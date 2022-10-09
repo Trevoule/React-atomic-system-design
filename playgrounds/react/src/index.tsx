@@ -22,12 +22,8 @@ const options = [{
 }]
 
 ReactDOM.render(
-    <Select options={options}/>,
-  // <div>
-  //   <Margin>
-  // <Color hexCode="#000" width="xl" height="xl"/>
-  // <Text>some text</Text>
-  // </Margin>
-  // </div>,
+  <div style={{padding: '40px'}}>
+    <Select options={options} />
+  </div>,
   document.querySelector("#root")
 );

@@ -1,20 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react'
+import Text from '../../atoms/Text'
 
 interface SelectOption {
     label: string;
     value: string;
 }
 
+interface renderOptionProps {
+  isSelected: boolean
+  option: SelectOption
+  getOptionRecommendedProps: (overrideProps?: Object ) => Object
+}
 
 interface SelectProps {
     onOptionSelected?: (option: SelectOption, optionIndex: number) => void
     options?: SelectOption[]
     label?: string
-
+    renderOption?: (props: renderOptionProps) => React.ReactNode
 }
 
-const Select:React.FC<SelectProps> = ({options = [], label = 'Please select an option...', onOptionSelected:handler } ) => {
+const Select:React.FC<SelectProps> = ({options = [], label = 'Please select an option...', onOptionSelected:handler, renderOption } ) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const labelRef = useRef<HTMLButtonElement>(null)
   const [overlayTop, setOverlayTop] = useState<number | null>(null);
   
@@ -22,6 +29,8 @@ const Select:React.FC<SelectProps> = ({options = [], label = 'Please select an o
     if(handler){
       handler(option, optionIndex)
     }
+    setSelectedIndex(optionIndex)
+    setIsOpen(false)
   }
 
   const onLabelClick = () => {
@@ -32,17 +41,57 @@ const Select:React.FC<SelectProps> = ({options = [], label = 'Please select an o
     setOverlayTop((labelRef.current?.offsetHeight || 0) + 10)
     }, [labelRef.current?.offsetHeight])
   
+    let selectedOption = null
+
+    if(selectedIndex !== null){
+      selectedOption = options[selectedIndex]
+    }
   
   return (
     <div className='dse-select'>
         <button ref={labelRef} className='dse-select__label' onClick={() => onLabelClick()}>
-      <span>{label}</span>
-      <svg width="1rem" height="1rem" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-</svg>
+      <Text>
+        {selectedIndex === null ? label : selectedOption?.label}
+      </Text>
+      <svg className={`dse-select__caret ${isOpen ? 'dse-select__caret--open' : 'dse-select__caret--close'}`} width="1rem" height="1rem" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+      </svg>
         </button>
     {isOpen && overlayTop && (<ul style={{top: overlayTop}} className='dse-select__overlay'>{options.map((option, optionIndex) => {
-        return <li onClick={() => onOptionSelected(option, optionIndex)} key={option.value}>{option.label}</li>
+        
+      const isSelected = selectedIndex === optionIndex
+        
+      const renderOptionProps = {
+        option,
+        isSelected,
+        getOptionRecommendedProps: (overrideProps = {
+        }) => {return {
+          className: `dse-select__option ${isSelected ? "dse-select__option--selected" : ""
+        }`,
+        onClick: () => onOptionSelected(option, optionIndex),
+        key: option.value,
+        ...overrideProps,
+
+        }}
+      }
+
+        if(renderOption){
+          return renderOption(renderOptionProps)
+        }
+        
+        return <li 
+        className={`dse-select__option ${isSelected ? "dse-select__option--selected" : ""
+      }`} 
+        onClick={() => onOptionSelected(option, optionIndex)} 
+        key={option.value}>
+          <Text>
+          {option.label}
+          </Text>
+           
+          {isSelected && (<svg width="1rem" height="1rem" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>)}
+          </li>            
     }) }</ul>)}
     
     </div>
